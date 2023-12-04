@@ -1,6 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-signin-client_id" content="507194984666-8ru5okmel584gjadh852spk3gcr9mld0.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
   <div id="my-signin2"></div>
@@ -24,11 +28,7 @@
         'onfailure': onFailure
       });
     }
-  </script>
 
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script>
-    // This will load the Google API platform and call renderButton() when it's ready
     window.onload = function () {
       gapi.load('auth2', function () {
         gapi.auth2.init({
