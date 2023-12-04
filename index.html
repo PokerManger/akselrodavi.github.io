@@ -11,6 +11,7 @@
     }
     function onFailure(error) {
       console.log('Logged in as: ' + googleUser);
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
       console.log(error);
     }
     function renderButton() {
