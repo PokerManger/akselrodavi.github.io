@@ -6,9 +6,11 @@
   <div id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser);
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
     function onFailure(error) {
+      console.log('Logged in as: ' + googleUser);
       console.log(error);
     }
     function renderButton() {
