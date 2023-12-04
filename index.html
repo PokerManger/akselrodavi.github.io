@@ -1,39 +1,29 @@
 <html>
-  <head>
-    <!-- Include the Google API library -->
-    <script src="https://apis.google.com/js/api.js"></script>
-    <!-- Include the Google Sign-In library -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  </head>
-  <body>
-    <div class="g-signin2" data-clientid="507194984666-stfs0ciqi1h2h7qt7vetomll6qaq0pd3" data-onsuccess="onSignIn"></div>
-    <button id="signout-button">Sign out</button>
+<head>
+  <meta name="google-signin-client_id" content="507194984666-8ru5okmel584gjadh852spk3gcr9mld0.apps.googleusercontent.com">
+</head>
+<body>
+  <div id="my-signin2"></div>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
 
-    <!-- Your page content goes here -->
-    
-    <script>
-      // Combine the two onSignIn functions
-      function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log(id_token);
-
-        // Send the id_token to your server
-        fetch('http://localhost:80', {
-          method: 'POST',
-          body: JSON.stringify({ id_token: id_token }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        // Add event listener for signout-button
-        document.getElementById('signout-button').addEventListener('click', function () {
-          var auth2 = gapi.auth2.getAuthInstance();
-          auth2.signOut().then(function () {
-            console.log('User signed out.');
-          });
-        });
-      }
-    </script>
-  </body>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
 </html>
